@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
 import InputGroup from "react-bootstrap/InputGroup";
 import { MovieCard } from "../movie-card/movie-card";
+import { S3Images } from "../s3-images/s3-images";
 
 export const ProfileView = ({ user, token, setUser, setToken, movies }) => {
   const [Username, setUsername] = useState(user.Username);
@@ -119,13 +120,18 @@ export const ProfileView = ({ user, token, setUser, setToken, movies }) => {
       <Row>
         <Col>
           <Row className="my-3">
-            <h3>Account Information</h3>
-            <p>
-              Username: {user.Username}<br />
-              Email: {user.Email}<br />
-              Birthday: {legibleDate}
-              {/* Birthday: {user.Birthday} */}
-            </p>  
+            <Col>
+              <S3Images />
+            </Col>
+            <Col>
+              <h3>Account Information</h3>
+              <p>
+                Username: {user.Username}<br />
+                Email: {user.Email}<br />
+                Birthday: {legibleDate}
+                {/* Birthday: {user.Birthday} */}
+              </p> 
+            </Col>
           </Row>
 
           <Row className="my-3">
