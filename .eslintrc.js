@@ -3,12 +3,14 @@ module.exports = {
         "browser": true,
         "es2021": true
     },
-    "extends": ["eslint:recommended", "plugin:n/recommended"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "overrides": [
         {
             "env": {
-                "node": true,
-                "amd": true
+                "node": true
             },
             "files": [
                 ".eslintrc.{js,cjs}"
@@ -19,10 +21,16 @@ module.exports = {
         }
     ],
     "parserOptions": {
-        "ecmaVersion": 2021,
+        "ecmaVersion": "latest",
+        "ecmaFeatures": {
+            "jsx": true
+        },
         "sourceType": "module"
     },
+    "plugins": [
+        "react"
+    ],
     "rules": {
-        "n/exports-style": ["error", "module.exports"]
+        "react/prop-types": "enabled"
     }
 }

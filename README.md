@@ -1,129 +1,45 @@
-# Movie API
-This API is the server-side component of a movies web application, built with Node.js, that will allow users to access information about different movies, directors, and genres.
-Users will be able to sign up, update their personal information, and create a list of their favorite movies.
+# PopOpolis
 
-# Endpoints
+The client-side of a CRUD movie application built with React and Bootstrap.  It supports server-side code for a REST API and database built with Node.js, Express.js, and MongoDB.
 
-## Return All Moves
-**URL** - `/movies`
+This is a single-page, responsive app with routing, several interface views, and a polished user experience.
 
-**Method** - GET
+## Features
 
-**Request Data Format** - None
+- Users can create an account and login to the app.
+- Users can browse a list of movies.
+- Users can select a movie for more details.
+- Users can add and remove movies from a list of their favorite movies.
+- Users can view their account information and their list of favorite movies from a Profile view.
+- Users can update their account information.
+- Users can loggout of the app and deregister their accounts.
 
-**Response Data Format** - A JSON object holding a complete list of movies in the database.
+## Dependencies
 
-## Return a Single Move
-**URL** - `/movies/[Title]`
+    "bootstrap": "^5.3.2",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.9.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.16.0",
+    "react-router-dom": "^6.16.0"
 
-**Method** - GET
+## Getting Started
 
-**Request Data Format** - None
+To get a local copy up and running, follow these steps:
 
-**Response Data Format** - A JSON object holding data about a single movie. Example:  
+1. Clone this repository: `git clone https://github.com/kellysdev/movie-client.git`
+2. From the working directory, install the app's dependencies: `npm i`
+3. Start the project with `npx parcel src/index.html`
 
-<dl>
- {<br>
- Title: "Howl's Moving Castle",<br>
- Description: "description text here",<br>
- Genre: {<br>
-  Name: "Fantasy"<br>
-  Description: "description text here"<br>
- }<br>
- Director: {<br>
-  Name: "Hayao Miyazaki",<br>
-  Bio: "bio text here",<br>
-  Birth: "date"<br>
- }<br>
- Actors: ["two featured actors"],<br>
- ImagePath: "howlsmovingcastle.png"<br>
- Featured: "Yes"<br>
- }<br> </dl>
+## Link
 
-## Return Data About a Genre
-**URL** - `/movies/Genre/[Name]`
+[The live app is hosted on Netlify, linked here.](https://popopolis.netlify.app/)
 
-**Method** - GET
+[You can also find the server-side respository here](https://github.com/kellysdev/movie-api)
 
-**Request Data Format** - None
+## Future Updates
 
-**Response Data Format** - A JSON object holding data about a genre.  Example:
-
-<dl>
-{<br>
- Genre: "Fantasy",<br>
- Description: "description text here"<br>
-} </dl>
-
-## Return Data About a Director
-**URL** - `movies/Director/[Name]`
-
-**Method** - GET
-
-**Request Data Format** - None
-
-**Resonse Data Format** - A JSON object holding data about a director.  Example:
-
-<dl>
-{<br>
- Name: "Hayao Miyazaki",<br>
- Bio: "biography text here",<br>
- Birth: "date"<br>
-} </dl>
-
-## Allow New Users to Register
-**URL** - `/users`
-
-**Method** - POST
-
-**Request Data Format** - A JSON object holding data about the user registering.  Example:
-
-<dl>
-{<br>
- Name: "Kelly",<br>
- Password: "password",<br>
- Email: "kelly@mail.com",<br>
- Birthday: "date"<br>
-} </dl>
-
-## Allow Users to Update Their User Information
-**URL** - `/users/[Username]`
-
-**Method** - PUT
-
-**Request Data Format** - A JSON object holding data to update the user information.  Example:
-
-<dl>
-{<br>
- Username: "Kelly",<br>
- Password: "NewPassword",<br>
- Email: "kelly@mail.com",<br>
- Birthday: "date"<br>
-} </dl>
-
-## Allow Users to Add a Movie to Their List of Favorites
-**URL** - `/users/[Username]/movies/[MovieID]`
-
-**Method** - POST
-
-**Request Data Format** - None
-
-**Response Data Format** - A text message showing that the movie has been successfully added to their list of favorite movies.
-
-## Allow Users to Remove a Movie from Their List of Favorites
-**URL** - `/users/[Username]movies/[MovieID]`
-
-**Method** - DELETE
-
-**Request Data Format** - None
-
-**Response Data Format** - A text message showing that the movie has been successfully deleted from their list of favorites.
-
-## Allow Users to Deregister
-**URL** - `/users/[Username]`
-
-**Method** - DELETE
-
-**Request Data Format** - None
-
-**Response Data Format** - A text message showing that the user has successfully deregistered their account.
+- [ ] Allow users to share a movie
+- [ ] Allow users to sort movies based on different criteria
+- [ ] Allow users to create a "To Watch" list in addition to their "Favorite Movies" list

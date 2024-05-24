@@ -1,0 +1,49 @@
+$enable-negative-margins: true;
+
+.deregister {
+  color: red;
+  text-decoration: none;
+  text-align: right;
+}
+
+.welcome-links {
+  text-decoration: none;
+  text-align: right;
+}
+
+.guest-login:hover {
+  background-color: transparent;
+ }
+ 
+.welcome-buttons {
+  text-align: right;
+}
+
+.navbar-brand {
+  font-family: 'Limelight', sans-serif;
+}
+
+.logo {
+  font-family: 'Limelight', sans-serif;
+  text-align: center;
+}
+
+.movieview-image {
+  object-fit: fit;
+  width: 30vw;
+  height: 40vw;
+}
+
+.movieview-buttons {
+  text-align: center;
+}
+
+.moviecard-image {
+  width: 100%;
+  height: 25vw;
+  object-fit: fill;
+}
+
+.mt-n3 {
+  margin-top: -0.75rem !important;
+}

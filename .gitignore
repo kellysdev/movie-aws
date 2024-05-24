@@ -1,5 +1,5 @@
-# ignore the node_modules folder
-/node_modules
-
-# ignore .env
+node_modules
+.cache
+.parcel-cache
+dist
 .env
