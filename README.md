@@ -1,6 +1,6 @@
 # PopOpolis
 
-The client-side of a CRUD movie application built with React and Bootstrap.  It supports server-side code for a REST API and database built with Node.js, Express.js, and MongoDB.
+The client-side of a CRUD movie application built with React and Bootstrap to be hosted on AWS.  It supports server-side code for a REST API and database built with Node.js, Express.js, MongoDB, and the AWS SDK.
 
 This is a single-page, responsive app with routing, several interface views, and a polished user experience.
 
@@ -12,6 +12,7 @@ This is a single-page, responsive app with routing, several interface views, and
 - Users can add and remove movies from a list of their favorite movies.
 - Users can view their account information and their list of favorite movies from a Profile view.
 - Users can update their account information.
+- Users can upload a profile image.
 - Users can loggout of the app and deregister their accounts.
 
 ## Dependencies
