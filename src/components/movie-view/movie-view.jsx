@@ -15,7 +15,7 @@ export const MovieView = ({ movies, user, setUser, token }) => {
   const handleAddFavorite = (event) => {
     event.preventDefault();
 
-    fetch(`${process.env.REACT_APP_URL}/users/${user.Username}/movies/${movie._id}`, {
+    fetch(`${process.env.ALB_URL}/users/${user.Username}/movies/${movie._id}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -28,7 +28,7 @@ export const MovieView = ({ movies, user, setUser, token }) => {
       }
     })
     .then(() => {
-      fetch(`${process.env.REACT_APP_URL}/users/${user.Username}`, {
+      fetch(`${process.env.ALB_URL}/users/${user.Username}`, {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then((response) => response.json())
@@ -42,7 +42,7 @@ export const MovieView = ({ movies, user, setUser, token }) => {
   const handleRemoveFavorite = (event) => {
     event.preventDefault();
 
-    fetch(`${process.env.REACT_APP_URL}/users/${user.Username}/movies/${movie._id}`, {
+    fetch(`${process.env.ALB_URL}/users/${user.Username}/movies/${movie._id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}`}
     })
@@ -54,7 +54,7 @@ export const MovieView = ({ movies, user, setUser, token }) => {
       }
     })
     .then(() => {
-      fetch(`${process.env.REACT_APP_URL}/users/${user.Username}`, {
+      fetch(`${process.env.ALB_URL}/users/${user.Username}`, {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then((response) => response.json())
