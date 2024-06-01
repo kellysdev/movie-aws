@@ -11,7 +11,6 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { SearchBar } from "../search-bar/search-bar";
 
 const MainView = () => {
-  // const storedUsername = localStorage.getItem("username");
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
@@ -21,7 +20,7 @@ const MainView = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch("MovieLoadBalancer-598921563.us-west-2.elb.amazonaws.com/movies", {
+    fetch(`${process.env.ALB_URL}/movies`, {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then((response) => response.json())
