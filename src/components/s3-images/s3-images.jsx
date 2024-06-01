@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Button, Row, Col, Form, Image } from "react-bootstrap";
+import { Button, Row, Col, Form, Image, Modal } from "react-bootstrap";
 
 export const S3Images = ({  }) => {
   const [file, setFile] = useState(File | null); // file from fileForm input field or from image fetched from bucket from modal
@@ -9,7 +9,7 @@ export const S3Images = ({  }) => {
 
   // modal that displays thumbnails of all images in the bucket
   const [showBucketListModal, setShowBucketListModal] = useState(false);
-  const openShowBucketListModal = () => setShowBucketListModal(true);
+  const openBucketListModal = () => setShowBucketListModal(true);
   const closeBucketListModal = () => setShowBucketListModal(false);
 
   // modal that will display the origianl image once its thumbnail is clicked on
@@ -102,14 +102,14 @@ export const S3Images = ({  }) => {
             <Button onClick={submitImage} variant="warning" size="sm">Submit</Button>
           </Form.Group>
 
-          <Button onClick={showModal} variant="link" className="welcome-links">
+          <Button onClick={openShowBucketListModal} variant="link" className="welcome-links">
             Or select an picture from the bucket
           </Button>
         </Col>
       </Row>
 
     {/* Thumbnail modal */}
-      <Modal show={openShowBucketListModal} onHide={closeModal} animation={false}>
+      <Modal show={openBucketListModal} onHide={closeBucketListModal} animation={false}>
         <Modal.Header>
           <Modal.Title>Click on an image to view it in more deatil and to select it as your profile picture:</Modal.Title>
         </Modal.Header>
