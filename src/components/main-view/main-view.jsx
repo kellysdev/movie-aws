@@ -38,7 +38,7 @@ const MainView = () => {
             element={
               <>
                 {user ? (
-                  <Navigate to="movie-client-side-bucket.s3-website-us-west-1.amazonaws.com/" />
+                  <Navigate to="/" />
                 ) : (
                   <Col md={5}>
                     <SignupView />
