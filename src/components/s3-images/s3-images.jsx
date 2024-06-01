@@ -5,6 +5,7 @@ export const S3Images = ({  }) => {
   const [file, setFile] = useState(File | null); // file from fileForm input field or from image fetched from bucket from modal
   const [profileImage, setProfileImage] = useState(file? file.fileName : "placeholder.png");
   const [bucketImages, setBucketImages] = useState([{}]); // all images from bucket
+  const [thumbnails, setThumbnails] = useState([]); // thumbnails filtered from all images
   const [selectedImage, setSelectedImage] = useState(""); // image clicked on in modal
 
   // modal that displays thumbnails of all images in the bucket
@@ -23,24 +24,25 @@ export const S3Images = ({  }) => {
   useEffect(() => {
     if (showBucketListModal) {
       try {
-        const allImages = fetch(`${process.env.ALB_URL}/images`, {
+        fetch(`${process.env.ALB_URL}/images`, {
           method: "GET"
-        });
-        console.log(allImages);
-        setBucketImages(allImages);
+        })
+        .then(response => response.json())
+        .then(data =>{
+          // get list of image names
+          const allImages = data.Contents.map(image => image.Key);
+          setBucketImages(allImages);
+          console.log(bucketImages);
+
+          // filter out resized images
+          const resizedImages = bucketImages.filter(images => images.includes("resized"));
+          setThumbnails(resizedImages);
+        })
       } catch (error) {
         console.log("An error occurred fetching bucket images: " + error);
       }
     }
   }, [showBucketListModal]);
-
-  // generate thumbnail array
-  const thumbnails = bucketImages.filter(images => {
-    images.Key.includes("resized");
-  });
-
-  // get name of original image
-  const originalImage = selectedImage.replace("_resized.png", ".png");
 
   // capture the file in the input field in fileForm
   const onFileChange = (event) => {
@@ -142,8 +144,8 @@ export const S3Images = ({  }) => {
       <Modal show={showImageModal} onHide={closeImageModal} animation={false}>
         <Modal.Body>
           <img
-            src={originalImage}
-            alt={originalImage}
+            src={selectedImage.replace("_resized.png", ".png")}
+            alt={selectedImage.replace("_resized.png", ".png")}
           />
         </Modal.Body>
         <Modal.Footer>
