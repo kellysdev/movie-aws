@@ -61,7 +61,7 @@ export const ProfileView = ({ user, token, setUser, setToken, movies }) => {
       data["Password"] = Password
     };
 
-    fetch("MovieLoadBalancer-598921563.us-west-2.elb.amazonaws.com/users/" + user.Username, {
+    fetch(`${process.env.ALB_URL}/users/` + user.Username, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
