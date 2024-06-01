@@ -5,7 +5,7 @@ export const S3Images = ({  }) => {
   const [file, setFile] = useState(File | null); // file from fileForm input field or from image fetched from bucket from modal
   const [profileImage, setProfileImage] = useState(file? file.fileName : "placeholder.png");
   const [bucketImages, setBucketImages] = useState([{}]); // all images from bucket
-  const [thumbnails, setThumbnails] = useState([]); // thumbnails filtered from all images
+  const [thumbnails, setThumbnails] = useState([""]); // thumbnails filtered from all images
   const [selectedImage, setSelectedImage] = useState(""); // image clicked on in modal
 
   // modal that displays thumbnails of all images in the bucket
