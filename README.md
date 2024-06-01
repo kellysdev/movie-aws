@@ -13,6 +13,7 @@ This is a single-page, responsive app with routing, several interface views, and
 - Users can view their account information and their list of favorite movies from a Profile view.
 - Users can update their account information.
 - Users can upload a profile image.
+- Users can view images from the bucket their profile image is uploaded to.
 - Users can loggout of the app and deregister their accounts.
 
 ## Dependencies
@@ -29,7 +30,7 @@ This is a single-page, responsive app with routing, several interface views, and
 
 To get a local copy up and running, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/kellysdev/movie-client.git`
+1. Clone this repository: `git clone https://github.com/kellysdev/movie-aws.git`
 2. From the working directory, install the app's dependencies: `npm i`
 3. Start the project with `npx parcel src/index.html`
 
@@ -38,9 +39,3 @@ To get a local copy up and running, follow these steps:
 [The live app is hosted on Netlify, linked here.](https://popopolis.netlify.app/)
 
 [You can also find the server-side respository here](https://github.com/kellysdev/movie-api)
-
-## Future Updates
-
-- [ ] Allow users to share a movie
-- [ ] Allow users to sort movies based on different criteria
-- [ ] Allow users to create a "To Watch" list in addition to their "Favorite Movies" list
