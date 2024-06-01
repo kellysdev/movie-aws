@@ -16,7 +16,7 @@ export const LoginView = ({ onLoggedIn }) => {
 
     if (!token || !storedUsername) return;
 
-    fetch("http://MovieLoadBalancer-598921563.us-west-2.elb.amazonaws.com/users/" + storedUsername, {
+    fetch(`${process.env.ALB_URL}/users/` + storedUsername, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"  }
@@ -35,7 +35,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: Password
     }
 
-    fetch("MovieLoadBalancer-598921563.us-west-2.elb.amazonaws.com/login", {
+    fetch(`${process.env.ALB_URL}/login`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -65,7 +65,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: "guest"
     }
 
-    fetch("MovieLoadBalancer-598921563.us-west-2.elb.amazonaws.com/login", {
+    fetch(`${process.env.ALB_URL}/login`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
