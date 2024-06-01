@@ -104,7 +104,7 @@ export const S3Images = ({  }) => {
             <Button onClick={submitImage} variant="warning" size="sm">Submit</Button>
           </Form.Group>
 
-          <Button onClick={openShowBucketListModal} variant="link" className="welcome-links">
+          <Button onClick={openBucketListModal} variant="link" className="welcome-links">
             Or select an picture from the bucket
           </Button>
         </Col>
