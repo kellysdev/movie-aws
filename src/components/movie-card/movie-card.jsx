@@ -31,12 +31,6 @@ export const MovieCard = ({ movie, user }) => {
         <Card.Title>{movie.Title}</Card.Title>
         <p className="fs-6 text-muted text-end mt-auto">{movie.Genre.Name}</p>
 
-        {/* <Link to={`/movies/${encodeURIComponent(movie._id)}`} className="me-2 mb-2 ml-x">
-          <Button variant="warning">
-            Open
-          </Button>
-        </Link> */}
-
       </CardBody>
     </Card>
     </Link>
