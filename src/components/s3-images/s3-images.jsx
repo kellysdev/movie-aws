@@ -13,7 +13,7 @@ export const S3Images = ({  }) => {
   const [selectedImage, setSelectedImage] = useState(File | null)
 
   // this needs to be the image s3 bucket url
-  const apiURL = "";
+  const apiURL = process.env.IMAGES_BUCKET;
 
   // get all images from bucket
   useEffect(() => {
