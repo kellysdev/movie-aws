@@ -5,19 +5,17 @@ export const S3Images = ({  }) => {
   const [file, setFile] = useState(File | null); // file from fileForm input field
   const [profileImage, setProfileImage] = useState(file? fileName : "placeholder.png");
   const [bucketImages, setBucketImages] = useState([]); // all images from bucket
-  const [selectedImage, setSelectedImage] = useState(File | null)
+  const [selectedImage, setSelectedImage] = useState(File | null);
 
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
-  const apiURL = process.env.IMAGES_BUCKET;
-
   // get all images from bucket
   useEffect(() => {
     if (showModal) {
       try {
-        const allImages = fetch(`${apiURL}/images`);
+        const allImages = fetch(`${process.env.ALB_URL}/images`);
         console.log(allImages);
         setBucketImages(allImages);
       } catch (error) {
@@ -53,7 +51,7 @@ export const S3Images = ({  }) => {
       };
 
       try {
-        const uploadResult = await fetch(`${apiURL}/images`, {
+        const uploadResult = await fetch(`${process.env.ALB_URL}/images`, {
           method: "POST",
           body: formData,
         });
