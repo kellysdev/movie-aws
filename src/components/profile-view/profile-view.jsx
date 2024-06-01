@@ -92,7 +92,7 @@ export const ProfileView = ({ user, token, setUser, setToken, movies }) => {
   const handleCloseModal = () => setShowModal(false);
 
   const handleDeregister = () => {
-    fetch(`${process.env.REACT_APP_URL}/users/${user.Username}`, {
+    fetch(`${process.env.ALB_URL}/users/${user.Username}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
     })
