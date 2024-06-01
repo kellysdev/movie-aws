@@ -4,7 +4,7 @@ import { Button, Row, Col, Form, Image, Modal } from "react-bootstrap";
 export const S3Images = ({  }) => {
   const [file, setFile] = useState(File | null); // file from fileForm input field or from image fetched from bucket from modal
   const [profileImage, setProfileImage] = useState(file? file.fileName : "placeholder.png");
-  const [bucketImages, setBucketImages] = useState([]); // all images from bucket
+  const [bucketImages, setBucketImages] = useState([{}]); // all images from bucket
   const [selectedImage, setSelectedImage] = useState(""); // image clicked on in modal
 
   // modal that displays thumbnails of all images in the bucket
@@ -23,7 +23,9 @@ export const S3Images = ({  }) => {
   useEffect(() => {
     if (showBucketListModal) {
       try {
-        const allImages = fetch(`${process.env.ALB_URL}/images`);
+        const allImages = fetch(`${process.env.ALB_URL}/images`, {
+          method: "GET"
+        });
         console.log(allImages);
         setBucketImages(allImages);
       } catch (error) {
@@ -33,8 +35,8 @@ export const S3Images = ({  }) => {
   }, [showBucketListModal]);
 
   // generate thumbnail array
-  const thumbnails = bucketImages.filter(image => {
-    return image.Key,includes("resized");
+  const thumbnails = bucketImages.filter(images => {
+    images.Key.includes("resized");
   });
 
   // get name of original image
@@ -116,15 +118,19 @@ export const S3Images = ({  }) => {
           <Modal.Title>Click on an image to view it in more deatil and to select it as your profile picture:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {thumbnails.map((thumbnail, index) => {
-            <img
-              key={index}
-              src={`${apiURL}/${thumbnail.Key}`}
-              alt={`Thumbnail of ${thumbnail.Key}`}
-              className="img-thumbnail"
-              onClick={setSelectedImage}
-            />
-          })}
+          {bucketImages.length === 0 ? (
+            <p>There are no images in the bucket.</p>
+          ) : (
+            thumbnails.map((thumbnail, index) => {
+              <img
+                key={index}
+                src={`${apiURL}/${thumbnail.Key}`}
+                alt={`Thumbnail of ${thumbnail.Key}`}
+                className="img-thumbnail"
+                onClick={setSelectedImage}
+              />
+            })
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={getImage} variant="warning">Set Profile Picture</Button>
