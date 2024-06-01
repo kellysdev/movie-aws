@@ -61,7 +61,7 @@ export const ProfileView = ({ user, token, setUser, setToken, movies }) => {
       data["Password"] = Password
     };
 
-    fetch(`${process.env.ALB_URL}/users/` + user.Username, {
+    fetch(`${process.env.ALB_URL}/users/${user.Username}`, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
