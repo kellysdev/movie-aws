@@ -21,7 +21,7 @@ export const SignupView = () => {
       Birthday: Birthday
     };
   
-    fetch("MovieLoadBalancer-598921563.us-west-2.elb.amazonaws.com/users", {
+    fetch(`${process.env.ALB_URL}/users`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
