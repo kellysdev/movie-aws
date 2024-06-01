@@ -17,6 +17,8 @@ export const S3Images = ({  }) => {
   const openImageModal = () => setShowImageModal(true);
   const closeImageModal = () => setShowImageModal(false);
 
+  const inputRef = useRef("");
+
   // get list of images from bucket
   useEffect(() => {
     if (showBucketListModal) {
