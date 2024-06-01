@@ -85,10 +85,6 @@ export const MovieView = ({ movies, user, setUser, token }) => {
             ? <Button onClick={handleRemoveFavorite} className="p-2 m-2" variant="warning">Remove from Favorites</Button> 
             : <Button onClick={handleAddFavorite} className="p-2 m-2" variant="warning">Add to Favorites</Button>
           }
-
-          {/* <Link to={`/`}>
-            <Button variant="warning" className="p-2 ms-auto">Home</Button>
-          </Link> */}
         </Row>
       </Col>
 
