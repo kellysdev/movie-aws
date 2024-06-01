@@ -10,7 +10,7 @@ export const S3Images = ({  }) => {
   // modal that displays thumbnails of all images in the bucket
   const [showBucketListModal, setShowBucketListModal] = useState(false);
   const openBucketListModal = () => setShowBucketListModal(true);
-  const closeBucketListModal = () => setShowBucketListModal(false);
+  const handleCloseBuckettModal = () => setShowBucketListModal(false);
 
   // modal that will display the origianl image once its thumbnail is clicked on
   const [showImageModal, setShowImageModal] = useState(false);
@@ -111,7 +111,7 @@ export const S3Images = ({  }) => {
       </Row>
 
     {/* Thumbnail modal */}
-      <Modal show={openBucketListModal} onHide={closeBucketListModal} animation={false}>
+      <Modal show={showBucketListModal} onHide={handleCloseBuckettModal} animation={false}>
         <Modal.Header>
           <Modal.Title>Click on an image to view it in more deatil and to select it as your profile picture:</Modal.Title>
         </Modal.Header>
@@ -128,12 +128,12 @@ export const S3Images = ({  }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={getImage} variant="warning">Set Profile Picture</Button>
-          <Button onClick={closeBucketListModal} variant="warning">Close</Button>
+          <Button onClick={handleCloseBuckettModal} variant="warning">Close</Button>
         </Modal.Footer>
       </Modal>
 
       {/* individual image modal */}
-      <Modal show={openImageModal} onHide={closeImageModal} animation={false}>
+      <Modal show={showImageModal} onHide={closeImageModal} animation={false}>
         <Modal.Body>
           <img
             src={originalImage}
