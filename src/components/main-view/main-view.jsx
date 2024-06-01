@@ -34,7 +34,7 @@ const MainView = () => {
       <Row className="justify-content-sm-center">
         <Routes>
           <Route
-            path="movie-client-side-bucket.s3-website-us-west-1.amazonaws.com/signup"
+            path="/signup"
             element={
               <>
                 {user ? (
