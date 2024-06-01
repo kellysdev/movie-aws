@@ -9,7 +9,7 @@ export const S3Images = ({  }) => {
 
   // modal that displays thumbnails of all images in the bucket
   const [showBucketListModal, setShowBucketListModal] = useState(false);
-  const openBucketListModal = () => setShowBucketListModal(true);
+  const openShowBucketListModal = () => setShowBucketListModal(true);
   const closeBucketListModal = () => setShowBucketListModal(false);
 
   // modal that will display the origianl image once its thumbnail is clicked on
