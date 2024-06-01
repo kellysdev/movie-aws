@@ -3,7 +3,7 @@ import { Button, Row, Col, Form, Image } from "react-bootstrap";
 
 export const S3Images = ({  }) => {
   const [file, setFile] = useState(File | null); // file from fileForm input field
-  const [profileImage, setProfileImage] = useState("placeholder.png");
+  const [profileImage, setProfileImage] = useState(file? fileName : "placeholder.png");
   const [bucketImages, setBucketImages] = useState([]); // all images from bucket
 
   const [showModal, setShowModal] = useState(false);
@@ -60,7 +60,6 @@ export const S3Images = ({  }) => {
           body: formData,
         });
         console.log(uploadResult); // should be "Image uploaded successfully."
-        setFile("");
         resetFileInput();
       } catch (err) {
         console.log(err);
