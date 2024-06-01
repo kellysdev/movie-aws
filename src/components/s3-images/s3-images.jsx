@@ -2,18 +2,24 @@ import { useState, useEffect, useRef } from "react";
 import { Button, Row, Col, Form, Image } from "react-bootstrap";
 
 export const S3Images = ({  }) => {
-  const [file, setFile] = useState(File | null); // file from fileForm input field
-  const [profileImage, setProfileImage] = useState(file? fileName : "placeholder.png");
+  const [file, setFile] = useState(File | null); // file from fileForm input field or from image fetched from bucket from modal
+  const [profileImage, setProfileImage] = useState(file? file.fileName : "placeholder.png");
   const [bucketImages, setBucketImages] = useState([]); // all images from bucket
-  const [selectedImage, setSelectedImage] = useState(File | null);
+  const [selectedImage, setSelectedImage] = useState(File | null); // image clicked on in modal
 
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  // modal that displays thumbnails of all images in the bucket
+  const [showBucketListModal, setShowBucketListModal] = useState(false);
+  const openBucketListModal = () => setShowBucketListModal(true);
+  const closeBucketListModal = () => setShowBucketListModal(false);
 
-  // get all images from bucket
+  // modal that will display the origianl image once its thumbnail is clicked on
+  const [showImageModal, setShowImageModal] = useState(false);
+  const openImageModal = () => setShowImageModal(true);
+  const closeImageModal = () => setShowImageModal(false);
+
+  // get list of images from bucket
   useEffect(() => {
-    if (showModal) {
+    if (showBucketListModal) {
       try {
         const allImages = fetch(`${process.env.ALB_URL}/images`);
         console.log(allImages);
@@ -24,15 +30,13 @@ export const S3Images = ({  }) => {
     }
   }, [showModal]);
 
-  // get resized images from bucket
-  const thumbnails = bucketImages.filter(thumbnail => {
-    return thumbnail.Key.includes("resized");
-  })
+  // generate thumbnail array
+  const thumbnails = bucketImages.filter(image => {
+    return image.Key,includes("resized");
+  });
 
-  // get original images from bucket
-  const originalImages = bucketImages.filter(image => {
-
-  })
+  // get name of original image
+  const originalImage = selectedImage.replace("_resized.png", ".png");
 
   // capture the file in the input field in fileForm
   const onFileChange = (event) => {
@@ -65,6 +69,25 @@ export const S3Images = ({  }) => {
     }
   };
 
+  // get image from bucket
+  const getImage = async () => {
+    if (selectedImage) {
+      const imageName = selectedImage.fileName;
+      console.log("imageName from get request: " + imageName);
+
+      try {
+        const fetchedImage = await fetch(`${process.env.ALB_URL}/images/${imageName}`, {
+          method: "GET"
+        });
+        console.log("fetched image:" + fetchedImage);
+
+
+      } catch (error) {
+        console.log("There was an error fetching the image: " + error);
+      }
+    }
+  };
+
   return (
     <>
       <Row className="d-flex flex-column">
@@ -85,23 +108,38 @@ export const S3Images = ({  }) => {
         </Col>
       </Row>
 
-      <Modal show={openModal} onHide={closeModal} animation={false}>
+    {/* Thumbnail modal */}
+      <Modal show={openShowBucketListModal} onHide={closeModal} animation={false}>
         <Modal.Header>
-          <Modal.Title>Select a profile picture:</Modal.Title>
+          <Modal.Title>Click on an image to view it in more deatil and to select it as your profile picture:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {thumbnails.map((image, index) => {
+          {thumbnails.map((thumbnail, index) => {
             <img
               key={index}
-              src={`${apiURL}/${image}`}
+              src={`${apiURL}/${thumbnail.Key}`}
+              alt={`Thumbnail of ${thumbnail.Key}`}
               className="img-thumbnail"
               onClick={setSelectedImage}
             />
           })}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={setProfileImage} variant="warning">Submit Profile Picture</Button>
-          <Button onClick={closeModal} variant="warning">Close</Button>
+          <Button onClick={getImage} variant="warning">Set Profile Picture</Button>
+          <Button onClick={closeBucketListModal} variant="warning">Close</Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* individual image modal */}
+      <Modal show={openImageModal} onHide={closeImageModal} animation={false}>
+        <Modal.Body>
+          <img
+            src={originalImage}
+            alt={originalImage}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={closeImageModal} variant="warning">Close</Button>
         </Modal.Footer>
       </Modal>
     </>
