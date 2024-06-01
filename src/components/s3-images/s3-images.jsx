@@ -28,7 +28,7 @@ export const S3Images = ({  }) => {
         console.log("An error occurred fetching bucket images: " + error);
       }
     }
-  }, [showModal]);
+  }, [showBucketListModal]);
 
   // generate thumbnail array
   const thumbnails = bucketImages.filter(image => {
