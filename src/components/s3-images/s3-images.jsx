@@ -130,7 +130,7 @@ export const S3Images = ({  }) => {
             thumbnails.map((thumbnail, index) => {
               <img
                 key={index}
-                src={`${process.env.IMAGES_BUCKET}/original-images/${thumbnail}`}
+                src={`${process.env.IMAGES_BUCKET}/${thumbnail}`}
                 alt={`Thumbnail of ${thumbnail}`}
                 className="img-thumbnail"
                 onClick={() => openImageModal(thumbnail)}
@@ -147,7 +147,7 @@ export const S3Images = ({  }) => {
       <Modal show={showImageModal} onHide={closeImageModal} animation={false}>
         <Modal.Body>
           <img
-            src={selectedImage.replace("_resized.png", ".png")}
+            src={`${process.env.IMAGES_BUCKET}/${selectedImage.replace("_resized.png", ".png")}`}
             alt={selectedImage.replace("_resized.png", ".png")}
           />
         </Modal.Body>
