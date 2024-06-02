@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { Button, Row, Col, Form, Image, Modal } from "react-bootstrap";
 
 export const S3Images = ({  }) => {
-  const [file, setFile] = useState(File | null); // file from fileForm input field or from image fetched from bucket from modal
-  const [profileImage, setProfileImage] = useState(file? file.name : "placeholder.png");
+  const [file, setFile] = useState(null); // file from fileForm input field or from image fetched from bucket from modal
+  const [profileImage, setProfileImage] = useState("placeholder.png");
   const [bucketImages, setBucketImages] = useState([]); // all images from bucket
-  const [thumbnails, setThumbnails] = useState([""]); // thumbnails filtered from all images
+  const [thumbnails, setThumbnails] = useState([]); // thumbnails filtered from all images
   const [selectedImage, setSelectedImage] = useState(""); // thumbnail clicked on in modal
 
   // modal that displays thumbnails of all images in the bucket
@@ -21,7 +21,7 @@ export const S3Images = ({  }) => {
   };
   const closeImageModal = () => setShowImageModal(false);
 
-  const inputRef = useRef("");
+  const inputRef = useRef(null);
 
   // get list of images from bucket
   useEffect(() => {
