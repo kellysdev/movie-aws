@@ -41,7 +41,7 @@ export const S3Images = ({  }) => {
           const resizedImages = bucketImages.filter(images => images.includes("resized"));
           setThumbnails(resizedImages);
           console.log(thumbnails);
-        })
+        });
       } catch (error) {
         console.log("An error occurred fetching bucket images: " + error);
       }
@@ -133,7 +133,7 @@ export const S3Images = ({  }) => {
                 src={`${process.env.IMAGES_BUCKET}/original-images/${thumbnail}`}
                 alt={`Thumbnail of ${thumbnail}`}
                 className="img-thumbnail"
-                onClick={openImageModal(thumbnail)}
+                onClick={() => openImageModal(thumbnail)}
               />
             })
           )}
