@@ -121,9 +121,10 @@ export const S3Images = ({  }) => {
     {/* Thumbnail modal */}
       <Modal show={showBucketListModal} onHide={handleCloseBuckettModal} animation={false}>
         <Modal.Header>
-          <Modal.Title>Click on a picture to view it in more detail.</Modal.Title>
+          <Modal.Title>Images Bucket</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <p>Click on a picture to view it in more detail.</p>
           {bucketImages.length === 0 ? (
             <p>There are no images in the bucket.</p>
           ) : (
