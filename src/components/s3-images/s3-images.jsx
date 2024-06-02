@@ -102,7 +102,7 @@ export const S3Images = ({  }) => {
     <>
       <Row className="d-flex flex-column">
         <Col>
-          <img className="profile-picture" src={profileImage} rounded />
+          <img className="profile-picture" src={profileImage} />
         </Col>
 
         <Col>
