@@ -3,10 +3,10 @@ import { Button, Row, Col, Form, Image, Modal } from "react-bootstrap";
 
 export const S3Images = ({  }) => {
   const [file, setFile] = useState(File | null); // file from fileForm input field or from image fetched from bucket from modal
-  const [profileImage, setProfileImage] = useState(file? file.fileName : "placeholder.png");
-  const [bucketImages, setBucketImages] = useState([{}]); // all images from bucket
+  const [profileImage, setProfileImage] = useState(file? file.name : "placeholder.png");
+  const [bucketImages, setBucketImages] = useState([]); // all images from bucket
   const [thumbnails, setThumbnails] = useState([""]); // thumbnails filtered from all images
-  const [selectedImage, setSelectedImage] = useState(""); // image clicked on in modal
+  const [selectedImage, setSelectedImage] = useState(""); // thumbnail clicked on in modal
 
   // modal that displays thumbnails of all images in the bucket
   const [showBucketListModal, setShowBucketListModal] = useState(false);
@@ -15,7 +15,10 @@ export const S3Images = ({  }) => {
 
   // modal that will display the origianl image once its thumbnail is clicked on
   const [showImageModal, setShowImageModal] = useState(false);
-  const openImageModal = () => setShowImageModal(true);
+  const openImageModal = (thumbnail) => {
+    setShowImageModal(true);
+    setSelectedImage(thumbnail);
+  };
   const closeImageModal = () => setShowImageModal(false);
 
   const inputRef = useRef("");
@@ -37,6 +40,7 @@ export const S3Images = ({  }) => {
           // filter out resized images
           const resizedImages = bucketImages.filter(images => images.includes("resized"));
           setThumbnails(resizedImages);
+          console.log(thumbnails);
         })
       } catch (error) {
         console.log("An error occurred fetching bucket images: " + error);
@@ -98,7 +102,7 @@ export const S3Images = ({  }) => {
     <>
       <Row className="d-flex flex-column">
         <Col>
-          <Image src={profileImage} rounded />
+          <img className="profile-picture" src={profileImage} rounded />
         </Col>
 
         <Col>
@@ -109,7 +113,7 @@ export const S3Images = ({  }) => {
           </Form.Group>
 
           <Button onClick={openBucketListModal} variant="link" className="welcome-links">
-            Or select an picture from the bucket
+            Or select a picture from the bucket
           </Button>
         </Col>
       </Row>
@@ -117,7 +121,7 @@ export const S3Images = ({  }) => {
     {/* Thumbnail modal */}
       <Modal show={showBucketListModal} onHide={handleCloseBuckettModal} animation={false}>
         <Modal.Header>
-          <Modal.Title>Click on an image to view it in more deatil and to select it as your profile picture:</Modal.Title>
+          <Modal.Title>Click on a picture to view it in more detail.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {bucketImages.length === 0 ? (
@@ -126,16 +130,15 @@ export const S3Images = ({  }) => {
             thumbnails.map((thumbnail, index) => {
               <img
                 key={index}
-                src={`${apiURL}/${thumbnail.Key}`}
-                alt={`Thumbnail of ${thumbnail.Key}`}
+                src={`${process.env.IMAGES_BUCKET}/original-images/${thumbnail}`}
+                alt={`Thumbnail of ${thumbnail}`}
                 className="img-thumbnail"
-                onClick={setSelectedImage}
+                onClick={openImageModal(thumbnail)}
               />
             })
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={getImage} variant="warning">Set Profile Picture</Button>
           <Button onClick={handleCloseBuckettModal} variant="warning">Close</Button>
         </Modal.Footer>
       </Modal>
@@ -149,6 +152,7 @@ export const S3Images = ({  }) => {
           />
         </Modal.Body>
         <Modal.Footer>
+          <Button onClick={setFile} variant="warning">Set as Profile Picture</Button>
           <Button onClick={closeImageModal} variant="warning">Close</Button>
         </Modal.Footer>
       </Modal>
