@@ -48,6 +48,11 @@ $enable-negative-margins: true;
   margin-top: -0.75rem !important;
 }
 
+.profile-picture {
+  border-radius: 50%;
+  max-width: 200px;
+}
+
 .bucket-thumbnails {
   margin: 5px;
   width: 150px;
