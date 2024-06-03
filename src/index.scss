@@ -60,6 +60,11 @@ $enable-negative-margins: true;
   object-fit: contain;
 }
 
+.modal-image {
+  margin: auto;
+  max-width: 100%;
+}
+
 .fileForm {
   max-width: 300px;
 }
