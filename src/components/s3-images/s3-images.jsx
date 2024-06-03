@@ -41,6 +41,7 @@ export const S3Images = ({  }) => {
           const resizedImages = bucketImages.filter(images => images.includes("resized"));
           setThumbnails(resizedImages);
           console.log(thumbnails);
+          console.log(resizedImages);
         });
       } catch (error) {
         console.log("An error occurred fetching bucket images: " + error);
@@ -58,7 +59,7 @@ export const S3Images = ({  }) => {
   const submitImage = async () => {
     if (file) {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("image", file);
       
       const resetFileInput = () => {
         inputRef.current.value = null;
@@ -129,7 +130,7 @@ export const S3Images = ({  }) => {
             <p>There are no images in the bucket.</p>
           ) : (
             thumbnails.map((thumbnail, index) => {
-              <img
+              return <img
                 key={index}
                 src={`${process.env.IMAGES_BUCKET}/${thumbnail}`}
                 alt={`Thumbnail of ${thumbnail}`}
