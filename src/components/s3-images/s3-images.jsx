@@ -80,25 +80,6 @@ export const S3Images = ({  }) => {
     }
   };
 
-  // get image from bucket
-  const getImage = async () => {
-    if (selectedImage) {
-      const imageName = selectedImage.fileName;
-      console.log("imageName from get request: " + imageName);
-
-      try {
-        const fetchedImage = await fetch(`${process.env.ALB_URL}/images/${imageName}`, {
-          method: "GET"
-        });
-        console.log("fetched image:" + fetchedImage);
-
-
-      } catch (error) {
-        console.log("There was an error fetching the image: " + error);
-      }
-    }
-  };
-
   return (
     <>
       <Row className="d-flex flex-column">
