@@ -104,7 +104,7 @@ export const S3Images = ({  }) => {
       <Row className="d-flex flex-column">
         <Col >
           {profileImage === "" ? (
-            <img className="profile-picture" src="src/placeholder.png" alt="placeholder profile picture" />
+            <img className="profile-picture" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="placeholder profile picture" />
           ) : (
             <img className="profile-picture" src={`${process.env.IMAGES_BUCKET}/${profileImage}`} />
           )}
