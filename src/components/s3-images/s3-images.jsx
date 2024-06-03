@@ -8,10 +8,10 @@ export const S3Images = ({  }) => {
   const [thumbnails, setThumbnails] = useState([]); // thumbnails filtered from all images
   const [selectedImage, setSelectedImage] = useState(""); // thumbnail clicked on in modal
 
-  // modal that displays thumbnails of all images in the bucket
-  const [showBucketListModal, setShowBucketListModal] = useState(false);
-  const openBucketListModal = () => setShowBucketListModal(true);
-  const handleCloseBuckettModal = () => setShowBucketListModal(false);
+  // displays thumbnails of all images in the bucket
+  const [showBucketList, setShowBucketList] = useState(false);
+  const openBucketList = () => setShowBucketList(true);
+  const handleCloseBucket = () => setShowBucketList(false);
 
   // modal that will display the origianl image once its thumbnail is clicked on
   const [showImageModal, setShowImageModal] = useState(false);
@@ -25,7 +25,7 @@ export const S3Images = ({  }) => {
 
   // get list of images from bucket
   useEffect(() => {
-    if (showBucketListModal) {
+    if (showBucketList) {
       try {
         fetch(`${process.env.ALB_URL}/images`, {
           method: "GET"
@@ -47,7 +47,7 @@ export const S3Images = ({  }) => {
         console.log("An error occurred fetching bucket images: " + error);
       }
     }
-  }, [showBucketListModal]);
+  }, [showBucketList]);
 
   // capture the file in the input field in fileForm
   const onFileChange = (event) => {
@@ -113,14 +113,41 @@ export const S3Images = ({  }) => {
             <Button onClick={submitImage} variant="warning" size="sm">Submit</Button>
           </Form.Group>
 
-          <Button onClick={openBucketListModal} variant="link" className="welcome-links">
+          <Button onClick={openBucketList} variant="link" className="welcome-links">
             Or select a picture from the bucket
           </Button>
         </Col>
+
+        {showBucketList && (
+          <>
+            <Col>
+              <p>Click on a picture to view it in more detail.</p>
+            </Col>
+            <Col className="d-flex" xs={3}>
+                {bucketImages.length === 0 ? (
+                  <p>There are no images in the bucket.</p>
+                ) : (
+                  thumbnails.map((thumbnail, index) => {
+                    return <img
+                      key={index}
+                      src={`${process.env.IMAGES_BUCKET}/${thumbnail}`}
+                      alt={`Thumbnail of ${thumbnail}`}
+                      className="bucket-thumbnails"
+                      onClick={() => openImageModal(thumbnail)}
+                    />
+                  })
+                )}
+
+            </Col>
+            <Col>
+              <Button onClick={handleCloseBucket} variant="warning">Close</Button>
+            </Col>
+          </>
+        )}
       </Row>
 
     {/* Thumbnail modal */}
-      <Modal show={showBucketListModal} onHide={handleCloseBuckettModal} animation={false}>
+      {/* <Modal show={showBucketListModal} onHide={handleCloseBuckettModal} animation={false}>
         <Modal.Header>
           <Modal.Title>Images Bucket</Modal.Title>
         </Modal.Header>
@@ -143,7 +170,7 @@ export const S3Images = ({  }) => {
         <Modal.Footer>
           <Button onClick={handleCloseBuckettModal} variant="warning">Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
 
       {/* individual image modal */}
       <Modal show={showImageModal} onHide={closeImageModal} animation={false}>
