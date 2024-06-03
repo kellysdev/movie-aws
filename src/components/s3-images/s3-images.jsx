@@ -154,12 +154,13 @@ export const S3Images = ({  }) => {
       <Modal show={showImageModal} onHide={closeImageModal} animation={false}>
         <Modal.Body>
           <img
-            src={`${process.env.IMAGES_BUCKET}/${selectedImage.replace("_resized.png", ".png")}`}
-            alt={selectedImage.replace("_resized.png", ".png")}
+            src={`${process.env.IMAGES_BUCKET}/${selectedImage.replace("resized", "original-images")}`}
+            alt={selectedImage.replace("resized", "")}
+            className="modal-image"
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setProfileImage(selectedImage)} variant="warning">Set as Profile Picture</Button>
+          <Button onClick={() => setProfileImage(selectedImage.replace("resized", "original-images"))} variant="warning">Set as Profile Picture</Button>
           <Button onClick={closeImageModal} variant="warning">Close</Button>
         </Modal.Footer>
       </Modal>
