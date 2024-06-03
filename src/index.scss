@@ -47,3 +47,10 @@ $enable-negative-margins: true;
 .mt-n3 {
   margin-top: -0.75rem !important;
 }
+
+.bucket-thumbnails {
+  margin: 5px;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
