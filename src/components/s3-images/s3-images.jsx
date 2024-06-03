@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Button, Row, Col, Form, Image, Modal } from "react-bootstrap";
 
 export const S3Images = ({  }) => {
-  const [file, setFile] = useState(null); // file from fileForm input field or from image fetched from bucket from modal
-  const [profileImage, setProfileImage] = useState("placeholder.png");
+  const [file, setFile] = useState(null); // file from fileForm input field
+  const [profileImage, setProfileImage] = useState("");
   const [bucketImages, setBucketImages] = useState([]); // all images from bucket
   const [thumbnails, setThumbnails] = useState([]); // thumbnails filtered from all images
   const [selectedImage, setSelectedImage] = useState(""); // thumbnail clicked on in modal
@@ -102,8 +102,12 @@ export const S3Images = ({  }) => {
   return (
     <>
       <Row className="d-flex flex-column">
-        <Col>
-          <img className="profile-picture" src={profileImage} />
+        <Col >
+          {profileImage === "" ? (
+            <img className="profile-picture" src="src/placeholder.png" alt="placeholder profile picture" />
+          ) : (
+            <img className="profile-picture" src={`${process.env.IMAGES_BUCKET}/${profileImage}`} />
+          )}
         </Col>
 
         <Col>
@@ -140,37 +144,11 @@ export const S3Images = ({  }) => {
 
             </Col>
             <Col>
-              <Button onClick={handleCloseBucket} variant="warning">Close</Button>
+              <Button onClick={handleCloseBucket} variant="warning" className="">Close</Button>
             </Col>
           </>
         )}
       </Row>
-
-    {/* Thumbnail modal */}
-      {/* <Modal show={showBucketListModal} onHide={handleCloseBuckettModal} animation={false}>
-        <Modal.Header>
-          <Modal.Title>Images Bucket</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Click on a picture to view it in more detail.</p>
-          {bucketImages.length === 0 ? (
-            <p>There are no images in the bucket.</p>
-          ) : (
-            thumbnails.map((thumbnail, index) => {
-              return <img
-                key={index}
-                src={`${process.env.IMAGES_BUCKET}/${thumbnail}`}
-                alt={`Thumbnail of ${thumbnail}`}
-                className="img-thumbnail"
-                onClick={() => openImageModal(thumbnail)}
-              />
-            })
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleCloseBuckettModal} variant="warning">Close</Button>
-        </Modal.Footer>
-      </Modal> */}
 
       {/* individual image modal */}
       <Modal show={showImageModal} onHide={closeImageModal} animation={false}>
@@ -181,7 +159,7 @@ export const S3Images = ({  }) => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={setFile} variant="warning">Set as Profile Picture</Button>
+          <Button onClick={() => setProfileImage(selectedImage)} variant="warning">Set as Profile Picture</Button>
           <Button onClick={closeImageModal} variant="warning">Close</Button>
         </Modal.Footer>
       </Modal>
