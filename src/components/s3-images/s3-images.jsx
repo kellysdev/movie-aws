@@ -72,6 +72,7 @@ export const S3Images = ({  }) => {
         });
         console.log(uploadResult); // should be "Image uploaded successfully."
         resetFileInput();
+        setProfileImage(`original-images/${file.name}`);
       } catch (err) {
         console.log(err);
       }
