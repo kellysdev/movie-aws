@@ -12,8 +12,9 @@ This is a single-page, responsive app with routing, several interface views, and
 - Users can add and remove movies from a list of their favorite movies.
 - Users can view their account information and their list of favorite movies from a Profile view.
 - Users can update their account information.
-- Users can upload a profile image.
+- Users can upload a profile image (this sets that image as their profile image).
 - Users can view images from the bucket their profile image is uploaded to.
+- Users can change their profile image.
 - Users can loggout of the app and deregister their accounts.
 
 ## Dependencies
@@ -36,6 +37,4 @@ To get a local copy up and running, follow these steps:
 
 ## Link
 
-[The live app is hosted on Netlify, linked here.](https://popopolis.netlify.app/)
-
-[You can also find the server-side respository here](https://github.com/kellysdev/movie-api)
+[You can find the server-side respository here](https://github.com/kellysdev/movie-api)
